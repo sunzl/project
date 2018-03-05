@@ -17,11 +17,13 @@ public class CORSConfiguration extends WebMvcConfigurerAdapter {
 		allowedOrigins：允许所有的请求域名访问我们的跨域资源，可以固定单条或者多条内容，如："http://www.baidu.com"，只有百度可以访问我们的跨域资源。
 		allowedHeaders：允许所有的请求header访问，可以自定义设置任意请求头信息，如："X-YAUTH-TOKEN"
 	 */
+	
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
 			.allowedMethods("*")
 			.allowedOrigins("*")
 			.allowedHeaders("*");
+		
 	}
 }
