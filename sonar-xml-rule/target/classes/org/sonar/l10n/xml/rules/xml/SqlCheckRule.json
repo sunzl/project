@@ -1,0 +1,13 @@
+{
+  "title": "sql check",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "20min"
+  },
+  "tags": [
+    "sql"
+  ],
+  "defaultSeverity": "Major"
+}

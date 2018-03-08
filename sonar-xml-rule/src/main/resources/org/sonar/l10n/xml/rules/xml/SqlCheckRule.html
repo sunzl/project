@@ -1,0 +1,20 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	</head>
+	<body>
+		<p>检查SQL是否符合要求</p>
+		<p>一、默认检查： </p>
+		<!-- 以下列表顺序请不要调整 -->
+		<ol>
+		  <li> 语句中不能出现 SELECT * 操作 </li>
+		  <li> 语句中要有where条件否则一定要有limit条件</li>
+		  <li> 语句中不能有DDL操作（create、drop、alter）</li>
+		  <li> 更新语句中不能出现表关联 </li>
+		  <li> 检查更新语句条件中如有主键且不能在判断条件中</li>
+		</ol>
+		
+		<p>二、可以自定义匹配内容，即在matchContent中输入要匹配的内容。</p>
+	</body>
+</html>
+

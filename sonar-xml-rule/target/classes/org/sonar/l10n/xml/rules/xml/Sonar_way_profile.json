@@ -1,0 +1,6 @@
+{
+  "name": "Sonar sql",
+  "ruleKeys": [
+    "SqlCheckRule"
+  ]
+}
