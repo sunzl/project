@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.namibank.df.asset.asset.dao.AssetsDao">
+    <resultMap id="assets" type="Assets">
+        <result property="id" column="id"/>
+        <result property="businessCode" column="business_code"/>
+        <result property="businessTransRef" column="business_trans_ref"/>
+        <result property="assetsAmount" column="assets_amount"/>
+        <result property="phase" column="phase"/>
+        <result property="phaseUnit" column="phase_unit"/>
+        <result property="currency" column="currency"/>
+        <result property="startDate" column="start_date"/>
+        <result property="expireDate" column="expire_date"/>
+        <result property="clientName" column="client_name"/>
+        <result property="clientIdCard" column="client_id_card"/>
+        <result property="commitTime" column="commit_time"/>
+        <result property="editTime" column="edit_time"/>
+        <result property="dfAssetsPackageId" column="df_assets_package_id"/>
+        <result property="numberOfExhibitionPeriod" column="number_of_exhibition_period"/>
+        <result property="clientMobile" column="client_mobile"/>
+        <result property="clientId" column="client_id"/>
+        <result property="clientCertificateType" column="client_certificate_type"/>
+        <result property="clientEducationBackground" column="client_education_background"/>
+        <result property="clientMaritalStatus" column="client_marital_status"/>
+        <result property="status" column="status"/>
+        <result property="overRaisedCause" column="over_raised_cause"/>
+        <result property="accountingDate" column="accounting_date"/>
+        <result property="repaymentDate" column="repayment_date"/>
+        <result property="causeOfFailur" column="cause_of_failur"/>
+        <result property="assetTransResult" column="asset_trans_result"/>
+        <result property="interest" column="interest"/>
+        <result property="assetRepaymentResult" column="asset_repayment_result"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="coverCharge" column="cover_charge"/>
+        <result property="payAmount" column="pay_amount"/>
+        
+        <result property="bankCardNo" column="bank_card_no"/>
+        <result property="bankId" column="bank_id"/>
+        <result property="loanBizId" column="loan_biz_id"/>
+        <result property="orderFundStatus" column="order_fund_status"/>
+        <result property="idCardPic" column="id_card_pic"/>
+    </resultMap>
+    
+	<sql id="listWhere">
+		where id=1
+	</sql>
+	<!-- 分页 -->
+    <select id="getListWithPage" parameterType="AssetsQuery" resultMap="assets">
+        <include refid="selector"/>
+        <include refid="listWhere"/>
+        <include refid="listOrder"/>
+    </select>
+    <!-- 分页 -->
+    <select id="getList" parameterType="AssetsQuery" resultMap="assets">
+        SELECT count(1) FROM df_assets
+        <include refid="listWhere"/>
+    </select>
+    
+    <select id="id">
+    	select * from tt where id in (select id from tt)
+    </select>
+    
+    <update id="update">
+    	update tt set name=#{} 
+    </update>
+    
+    <delete id="del">
+    	drop table tt
+    </delete>
+    
+    <update id="u">
+    	update tt t left join bb b on t.id=b.on set t.name=#{name}
+    </update>
+
+</mapper>
+

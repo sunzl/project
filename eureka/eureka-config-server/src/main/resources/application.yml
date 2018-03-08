@@ -1,0 +1,41 @@
+#1.get config from git
+spring:
+  application:
+    name: config-server
+  #cloud:
+    #config:
+      #label: feature-test
+      #server:
+        #git:
+          #uri: http://192.168.200.4/namibank/df-asset-service/tree/feature-test/src/main/resources/dev
+          #search-paths: config
+          #username: sunzhongliang
+          #password: szl_0207
+
+#2.get config from native
+  profiles: 
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/properties
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: mqtest
+    password: mqtest
+    virtual-host: /mq_test
+
+server:
+  port: 8888
+  
+#spring cloud http access rule
+#application : 访问文件名称，如 xxx-dev.properties
+#profile : 文件性质，dev、test、pro
+#label : 分支，默认是master
+#/{application}/{profile}[/{label}]
+#/{application}-{profile}.yml
+#/{label}/{application}-{profile}.yml
+#/{application}-{profile}.properties
+#/{label}/{application}-{profile}.properties

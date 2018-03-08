@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.namibank.df.cashloan.apply.dao.ApplyBankCardDao">
+
+	<insert id="saveBankCard" parameterType="com.namibank.df.cashloan.apply.domain.ApplyBankCard">
+		INSERT INTO
+		t_cash_bankcard
+		(bankcard_id,apply_id,txn_id,uid,card_no,card_type,card_state,create_time,update_time,card_kind,
+		card_due_date,card_back_num,valid,card_name,bank_name,bank_id,card_level)
+		VALUES
+		(#{bankCardid},#{applyid},#{txnid},#{uid},#{cardNo},#{cardType},#{cardState},SYSDATE(),
+		SYSDATE(),#{cardKind},#{cardDueDate},#{cardBackNum},#{valid},#{cardName},#{bankName},#{bankId},#{cardLevel})
+	</insert>
+	<select id="queryBankCardbyApplyid" parameterType="string"
+		resultMap="applyBankCard">
+		select * from t_cash_bankcard where apply_id=#{applyid}
+	</select>
+
+	<select id="queryBankCardbyBankid" parameterType="string"
+		resultMap="applyBankCard">
+		select * from t_cash_bankcard where bankcard_id=#{bankId}
+	</select>
+
+	<update id="bindingOrderAndCard" parameterType="string">
+		update
+		t_cash_bankcard
+		set txn_id=#{txnid}, update_time=SYSDATE()
+		where
+		apply_id=#{applyid}
+	</update>
+
+	<update id="updateDepositBankbyApplyid" parameterType="string">
+		update
+		t_cash_bankcard
+		set deposit_bank=#{depositBank}, update_time=SYSDATE()
+		where
+		apply_id=#{applyid}
+	</update>
+
+
+	<update id="updateBankCard" parameterType="com.namibank.df.cashloan.apply.domain.ApplyBankCard">
+		update t_cash_bankcard
+		set card_no=#{cardNo}, update_time=SYSDATE()
+		where apply_id=#{applyid}
+	</update>
+
+	<select id="countCardAndApply" parameterType="string"
+		resultType="int">
+		select count(*) FROM t_cash_bankcard
+		where apply_id=#{applyid} and card_no=#{cardNo}
+	</select>
+
+	<select id="queryLastBankCardByUid" parameterType="string"
+		resultMap="applyBankCard">
+		select * FROM t_cash_bankcard
+		where uid = #{uid} ORDER BY create_time DESC LIMIT 1
+	</select>
+
+	<delete id="dropBankCardbyApplyid" parameterType="string">
+		DELETE FROM
+		t_cash_bankcard where apply_id=#{applyid}
+	</delete>
+
+	<resultMap type="com.namibank.df.cashloan.apply.domain.ApplyBankCard"
+		id="applyBankCard">
+		<id property="bankCardid" column="bankcard_id" />
+		<result property="txnid" column="txn_id" />
+		<result property="applyid" column="apply_id" />
+		<result property="uid" column="uid" />
+		<result property="cardNo" column="card_no" />
+		<result property="cardType" column="card_type" />
+		<result property="cardState" column="card_state" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="cardKind" column="card_kind" />
+		<result property="cardDueDate" column="card_due_date" />
+		<result property="cardBackNum" column="card_back_num" />
+		<result property="valid" column="valid" />
+		<result property="cardName" column="card_name" />
+		<result property="bankName" column="bank_name" />
+		<result property="bankId" column="bank_id" />
+		<result property="cardLevel" column="card_level" />
+		<result property="depositBank" column="deposit_bank" />
+	</resultMap>
+</mapper>
